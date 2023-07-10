@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: {{ .Values.app.componentId }}
   annotations:
-    app.openshift.io/connects-to: '[{"apiVersion":"apps/v1","kind":"Deployment","name":"poi-backend-app"}]'
+    app.openshift.io/connects-to: '[{"apiVersion":"apps/v1","kind":"Deployment","name":"{{ .Values.app.namespace }}-poi-backend-app"}]'
   labels:
     {{- include "backstage.labels" . | nindent 4 }}
     {{- include "quarkus-template.labels" . | nindent 4 }}
