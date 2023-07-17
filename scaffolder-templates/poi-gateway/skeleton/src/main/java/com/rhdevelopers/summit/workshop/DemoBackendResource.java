@@ -18,30 +18,30 @@ import com.rhdevelopers.summit.workshop.BackendRegistry.Backend;
 import com.rhdevelopers.summit.workshop.BackendRegistry.Coordinates;
 
 @Path("fake/")
-public class FakeBackendResource {
+public class DemoBackendResource {
 
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
-    public static final Backend FAKE_BACKEND_INFO = new Backend(
-        "fake-backend",
+    public static final Backend DEMO_BACKEND_INFO = new Backend(
+        "demo-backend",
         "WeAreDevs POI",
         new Coordinates(0.0, 0.0),
         4
     );
     
-    public static final List<PoiRecord> POI_RECORDS = new ArrayList<>();
+    public static final List<PoiRecord> DEMO_POI_RECORDS = new ArrayList<>();
 
     @PostConstruct
     void initializePoiRecords() {
-        POI_RECORDS.add(new PoiRecord("Red Hat Headquarters", "Raleigh,NC,USA", List.of(35.787743, -78.644257)));
-        POI_RECORDS.add(new PoiRecord("Red Hat Summit","Boston,MA,USA", List.of(42.361145, -71.057083)));
+        DEMO_POI_RECORDS.add(new PoiRecord("Red Hat Headquarters", "Raleigh,NC,USA", List.of(35.787743, -78.644257)));
+        DEMO_POI_RECORDS.add(new PoiRecord("Red Hat Summit","Boston,MA,USA", List.of(42.361145, -71.057083)));
     }
 
     @GET
     @Path("ws/info")
     public Response getInfo() throws IOException {
         return Response.ok(
-            OBJECT_MAPPER.writeValueAsString(FAKE_BACKEND_INFO),
+            OBJECT_MAPPER.writeValueAsString(DEMO_BACKEND_INFO),
             MediaType.APPLICATION_JSON
         ).build();
     }
@@ -50,7 +50,7 @@ public class FakeBackendResource {
     @Path("poi/find/all")
     public Response getAllDataPoints() throws IOException {
         return Response.ok(
-            OBJECT_MAPPER.writeValueAsString(POI_RECORDS),
+            OBJECT_MAPPER.writeValueAsString(DEMO_POI_RECORDS),
             MediaType.APPLICATION_JSON
         ).build();
     }
@@ -58,12 +58,12 @@ public class FakeBackendResource {
     @GET
     @Path("poi/find/{id}")
     public Response getOneDataPoint(@PathParam("id") int id) throws IOException {
-        if(id < 0 || id >= POI_RECORDS.size()) {
+        if(id < 0 || id >= DEMO_POI_RECORDS.size()) {
             return Response.status(Response.Status.NOT_FOUND)
                 .entity("no data point with id "+id+" found").build();
         }
         return Response.ok(
-            OBJECT_MAPPER.writeValueAsString(POI_RECORDS.get(id)),
+            OBJECT_MAPPER.writeValueAsString(DEMO_POI_RECORDS.get(id)),
             MediaType.APPLICATION_JSON
         ).build();
     }
@@ -74,9 +74,9 @@ public class FakeBackendResource {
     @POST
     @Path("poi/add/point")
     public Response loadCustomPoi(PoiRecord record) {
-        POI_RECORDS.add(record);
+        DEMO_POI_RECORDS.add(record);
         return Response.created(
-            UriBuilder.fromPath("fake/poi/find/"+(POI_RECORDS.size()-1)).build()
+            UriBuilder.fromPath("fake/poi/find/"+(DEMO_POI_RECORDS.size()-1)).build()
         ).entity("inserted custom data point").build();
     }
     */
