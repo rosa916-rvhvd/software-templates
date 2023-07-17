@@ -38,6 +38,8 @@ spec:
       containers:
         - name: {{ .Chart.Name }}
           env:
+          - name: MAP_TITLE
+            value: {{ .Values.app.mapTitle }}
           - name: GATEWAY_API_URL
             value: {{ .Values.app.gatewayApiUrl }}
           - name: WEBSOCKET_ENDPOINT
