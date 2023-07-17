@@ -59,14 +59,14 @@ paths:
   /fake/poi/find/all:
     get:
       tags:
-      - Summit Backend Resource
+      - Demo Backend Resource
       responses:
         "200":
           description: OK
   /fake/poi/find/{id}:
     get:
       tags:
-      - Summit Backend Resource
+      - Demo Backend Resource
       parameters:
       - name: id
         in: path
@@ -80,7 +80,7 @@ paths:
   /fake/ws/info:
     get:
       tags:
-      - Summit Backend Resource
+      - Demo Backend Resource
       responses:
         "200":
           description: OK
