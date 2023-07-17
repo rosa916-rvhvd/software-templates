@@ -3,6 +3,7 @@
 # Declare variables to be passed into your templates.
 
 app:
+  mapTitle: Points of Interest Map - Red Hat Developer Hub @ We Are Developers 2023 🇩🇪
   gatewayApiUrl: http://${{values.namespace}}-poi-gateway-app-${{values.namespace}}${{values.cluster}}
   websocketEndpoint: ws://${{values.namespace}}-poi-gateway-app-${{values.namespace}}${{values.cluster}}/ws-server-endpoint
   componentId: ${{values.component_id}}
